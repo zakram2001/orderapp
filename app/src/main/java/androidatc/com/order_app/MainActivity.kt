@@ -3,6 +3,7 @@ package androidatc.com.order_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         orderResult.text="Your Order Total is: $"+(hotDogPrice+toppingsAndSidePrice)
     }
 
+
     fun orderOnClick (view:View) {
         var intent= Intent(this, SecondaryActivity::class.java)
         intent.putExtra("name", nameText.text.toString())
@@ -43,6 +45,11 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("state", stateText.text.toString())
         intent.putExtra("zip", zipText.text.toString())
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 }
 
