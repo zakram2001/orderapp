@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_secondary.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -34,5 +35,19 @@ class SecondaryActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.help -> {
+                this.startActivity(Intent(this, HelpActivity::class.java))
+                return true
+            }
+            R.id.settings -> {
+                this.startActivity(Intent(this, SettingsActivity::class.java))
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

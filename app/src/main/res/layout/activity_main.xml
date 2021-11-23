@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="136dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:text="Zen's Hot Dogs"
             android:textColor="#EA0505"
             android:textSize="20sp"
@@ -210,7 +210,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="44dp"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/phone"
             app:layout_constraintTop_toBottomOf="@+id/cityText" />
 
@@ -231,7 +231,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:ems="10"
-            android:inputType="textPostalAddress"
+            android:inputType="phone"
             app:layout_constraintStart_toEndOf="@+id/phone"
             app:layout_constraintTop_toBottomOf="@+id/zipText" />
 
