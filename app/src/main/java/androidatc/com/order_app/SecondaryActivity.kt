@@ -25,6 +25,9 @@ class SecondaryActivity : AppCompatActivity() {
         secondEmail.text=email
         secondAddress.text=address
         secondCity.text=city+ "," + "\t" + state + "\t" + zip
+
+        val actionbar = supportActionBar
+        actionbar!!.title = "Delivery Summary"
     }
 
     fun previousOnClick (view:View) {
