@@ -1,5 +1,6 @@
 package androidatc.com.order_app
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_secondary.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +18,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val i = intent
+        val name = i.getStringExtra("name")
+        val address = i.getStringExtra("address")
+        val city = i.getStringExtra("city")
+        val state = i.getStringExtra("state")
+        val zip = i.getStringExtra("zip")
+        val phone = i.getStringExtra("phone")
+        val email = i.getStringExtra("email")
+
+        nameText.setText(name)
+        addressText.setText(address)
+        cityText.setText(city)
+        stateText.setText(state)
+        zipText.setText(zip)
+        phoneText.setText(phone)
+        emailText.setText(email)
     }
 
     fun onOrderButtonClicked(view: View) {
