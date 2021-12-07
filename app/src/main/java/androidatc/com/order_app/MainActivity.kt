@@ -2,38 +2,62 @@ package androidatc.com.order_app
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_secondary.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class MainActivity : AppCompatActivity() {
+    val pref_Name="myPrefs"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val i = intent
-        val name = i.getStringExtra("name")
-        val address = i.getStringExtra("address")
-        val city = i.getStringExtra("city")
-        val state = i.getStringExtra("state")
-        val zip = i.getStringExtra("zip")
-        val phone = i.getStringExtra("phone")
-        val email = i.getStringExtra("email")
+        var databack: SharedPreferences =getSharedPreferences(pref_Name,0)
+        var name = databack.getString("name", "")
+        val address = databack.getString("address", "")
+        val city = databack.getString("city", "")
+        val state = databack.getString("state", "")
+        val zip = databack.getInt("zip", 0)
+        val phone = databack.getInt("phone", 0)
+        val email = databack.getString("email", "")
+        nameText.setText(name)
+        addressText.setText(address)
+        cityText.setText(city)
+        stateText.setText(state)
+        zipText.setText(zip.toString())
+        phoneText.setText(phone.toString())
+        emailText.setText(email)
+
+    }
+
+    override fun onStart(){
+        super.onStart()
+        var databack: SharedPreferences =getSharedPreferences(pref_Name,0)
+        var name = databack.getString("name", "")
+        val address = databack.getString("address", "")
+        val city = databack.getString("city", "")
+        val state = databack.getString("state", "")
+        val zip = databack.getInt("zip", 0)
+        val phone = databack.getInt("phone", 0)
+        val email = databack.getString("email", "")
 
         nameText.setText(name)
         addressText.setText(address)
         cityText.setText(city)
         stateText.setText(state)
-        zipText.setText(zip)
-        phoneText.setText(phone)
+        zipText.setText(zip.toString())
+        phoneText.setText(phone.toString())
         emailText.setText(email)
+
     }
 
     fun onOrderButtonClicked(view: View) {
@@ -91,6 +115,11 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.settings -> {
                 this.startActivity(Intent(this, SettingsActivity::class.java))
+                return true
+            }
+
+            R.id.login -> {
+                this.startActivity(Intent(this, LoginActivity::class.java))
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

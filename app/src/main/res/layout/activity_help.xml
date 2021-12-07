@@ -97,5 +97,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="40dp"
+            android:text="How do I save my information so I don't have to enter it every time I open the app?"
+            android:textColor="#090909"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:text="On the settings page, fill out the information you want to save and then click the &quot;save&quot; button. This will save your information so you don't have to enter it every time. To erase the information saved, just click the &quot;clear&quot; button and all the information saved will be cleared."
+            android:textColor="#0B0A0A"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

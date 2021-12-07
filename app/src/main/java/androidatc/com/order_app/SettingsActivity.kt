@@ -15,11 +15,13 @@ import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
 
-
+    val pref_Name = "myPrefs"
+    var myPref: SharedPreferences? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        val btnClear = findViewById<Button>(R.id.clearButton)
 
         //title and back bar
         val actionbar = supportActionBar
@@ -27,15 +29,16 @@ class SettingsActivity : AppCompatActivity() {
         actionbar.setDisplayHomeAsUpEnabled(true)
         actionbar.setDisplayHomeAsUpEnabled(true)
 
+
         //saves and stores information so user doesn't have to enter it over and over again
-        val pref =getPreferences(Context.MODE_PRIVATE)
-        val name = pref.getString("name", "")
-        val address = pref.getString("address", "")
-        val city = pref.getString("city", "")
-        val state = pref.getString("state", "")
-        val zip = pref.getInt("zip", 0)
-        val phone = pref.getInt("phone", 0)
-        val email = pref.getString("email", "")
+        var databack: SharedPreferences = getSharedPreferences(pref_Name, 0)
+        val name = databack.getString("name", "")
+        val address = databack.getString("address", "")
+        val city = databack.getString("city", "")
+        val state = databack.getString("state", "")
+        val zip = databack.getInt("zip", 0)
+        val phone = databack.getInt("phone", 0)
+        val email = databack.getString("email", "")
         storeName.setText(name)
         storeAddress.setText(address)
         storeCity.setText(city)
@@ -44,7 +47,29 @@ class SettingsActivity : AppCompatActivity() {
         storePhone.setText(phone.toString())
         storeEmail.setText(email)
 
+
+        btnClear.setOnClickListener(View.OnClickListener {
+            myPref = getSharedPreferences(pref_Name, 0)
+            var editor: SharedPreferences.Editor = (myPref as SharedPreferences).edit()
+            editor.clear()
+            editor.commit()
+            storeName.setText("").toString()
+            storeAddress.setText("").toString()
+            storeCity.setText("").toString()
+            storeState.setText("").toString()
+            storeZip.setText("".toString())
+            storePhone.setText("".toString())
+            storeEmail.setText("").toString()
+
+            val toast = Toast.makeText(applicationContext, "Cleared", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.BOTTOM, 0, 140)
+            toast.show()
+
+
+        })
+
     }
+
     //goes back to previous activity
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -53,10 +78,10 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     //saves information entered, display toast and sends information to fields in main activity
-    fun saveOnClick (view:View) {
+    fun saveOnClick(view: View) {
 
-        val pref =getPreferences(Context.MODE_PRIVATE)
-        val editor = pref.edit()
+        myPref = getSharedPreferences(pref_Name, 0)
+        var editor: SharedPreferences.Editor = (myPref as SharedPreferences).edit()
 
         editor.putString("name", storeName.text.toString())
         editor.putString("address", storeAddress.text.toString())
@@ -71,28 +96,8 @@ class SettingsActivity : AppCompatActivity() {
         toast.setGravity(Gravity.BOTTOM, 0, 140)
         toast.show()
 
-        var intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("name", storeName.getText().toString())
-        intent.putExtra("phone", storePhone.getText().toString())
-        intent.putExtra("email", storeEmail.getText().toString())
-        intent.putExtra("address", storeAddress.getText().toString())
-        intent.putExtra("city", storeCity.getText().toString())
-        intent.putExtra("state", storeState.getText().toString())
-        intent.putExtra("zip", storeZip.getText().toString())
-        startActivity(intent)
+
     }
-
-    //clears information entered
-    fun clearOnClick(view:View) {
-        val pref = getPreferences(Context.MODE_PRIVATE)
-        val editor = pref.edit()
-        editor.clear()
-        editor.commit()
-
-
-        val toast = Toast.makeText(applicationContext, "Clear", Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.BOTTOM, 0, 140)
-        toast.show()
-    }
-
 }
+
+
